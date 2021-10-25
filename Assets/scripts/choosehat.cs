@@ -29,9 +29,10 @@ public class choosehat : MonoBehaviour
         hat.Add(hat3);
         hat.Add(hat4);
     }
-    public void chooseMyHat(int numb){
-        // called by chat command to switch hat
+    public void chooseMyHat(int numb){// called by chat command to switch hat
         spriterenderer = gameObject.GetComponent<SpriteRenderer>();
-        spriterenderer.sprite = hat[numb];
+        if(numb>=0 && numb<=hat.Count-1){
+            spriterenderer.sprite = hat[numb];
+        }  
     }
 }
