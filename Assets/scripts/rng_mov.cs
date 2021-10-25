@@ -20,7 +20,7 @@ public class rng_mov : MonoBehaviour
     public Vector2 position_; // movement vector
     public GameObject huggy; // the other chibi hugged
     public bool hugAction=false; // check if the chibi is moving to hug another one
-    public int timeNoTalk=21600; // the amount of time the viewer was "afk"
+    public int timeNoTalk; // the amount of time the viewer was "afk"
     public bool isLurking; // check if the viewer is lurking
     public Animator animator; // gets the animator
     public GameObject hat; // the chibi's hat
@@ -28,8 +28,7 @@ public class rng_mov : MonoBehaviour
     public choosehat doit; // links to the choosehat script
     public nametag nameScript; // links to the nametag script
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         // get the chibi's child values
         nametag = gameObject.transform.GetChild(0).gameObject;
         hat = gameObject.transform.GetChild(1).gameObject;
@@ -39,8 +38,7 @@ public class rng_mov : MonoBehaviour
         isLurking=false;
     }
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         if(transform.position.x-goal>-0.1f && transform.position.x-goal<0.1f && isMoving){
             target(); // check if the chibi reached it's goal and gives it a new one
         }
@@ -60,7 +58,7 @@ public class rng_mov : MonoBehaviour
             hat.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,.5f);
         }
         else{
-            timeNoTalk -=1; // debug 
+            timeNoTalk -=1; // countdown 
         }
     }
     private void target(){ // defines the chibi's new target
@@ -74,7 +72,7 @@ public class rng_mov : MonoBehaviour
     }
     IEnumerator anim(int x, string anim){ // animation coroutine
         isMoving=false; // makes it stop moving
-        // call the anim animation
+        animator.Play(anim); // call the anim animation
         yield return new WaitForSeconds(x); // waits
         isMoving=true; // gets back to moving
         reset(); // resets all values
@@ -88,9 +86,6 @@ public class rng_mov : MonoBehaviour
         float step = speed * Time.deltaTime;
         position_= new Vector2(goal, transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, position_,step);
-    }
-    public void Jump(){
-        animator.Play("monster_jump"); // jump animation, should maybe get it into the coroutine
     }
     public void Hug(){ // waits for the hug
         goal= gameObject.transform.position.x;
@@ -114,5 +109,8 @@ public class rng_mov : MonoBehaviour
     }
     public void GoChooseMyHat(int numb){ // called to switch hat
         doit.chooseMyHat(numb);
+    }
+    public void Jump(){
+        StartCoroutine(anim(2,"monster_jump"));
     }
 }
