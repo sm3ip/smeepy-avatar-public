@@ -43,6 +43,7 @@ public class TwitchChat : MonoBehaviour
                 time = 0; // get the countdown 
             }
             ReadChat(); // get the chat messages each frame
+            time += 1;
         }
     }
 
