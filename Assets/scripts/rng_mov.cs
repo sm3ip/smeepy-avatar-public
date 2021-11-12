@@ -97,7 +97,7 @@ public class rng_mov : MonoBehaviour
         goal=huggy.transform.position.x;
         gameObject.transform.position=huggy.transform.position;
         isMoving=false;
-        StartCoroutine(anim(3,"hugged"));
+        //StartCoroutine(anim(3,"hugged")); the animation doesn't exist rn
     }
 
     public void BackFromTheVoid(){ // called when unlurking or when coming back from "afk"
