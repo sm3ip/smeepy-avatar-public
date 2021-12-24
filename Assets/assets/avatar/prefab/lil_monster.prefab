@@ -139,8 +139,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5379450689349657827}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.04, y: -0.61, z: 0}
-  m_LocalScale: {x: 0.40495783, y: 0.40495783, z: 0.6749296}
+  m_LocalPosition: {x: -0.34, y: -0.21, z: 0}
+  m_LocalScale: {x: 0.49688336, y: 0.49688336, z: 0.82813877}
   m_Children: []
   m_Father: {fileID: 5504745706058965714}
   m_RootOrder: 1
@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choice: 0
+  isChoiceChanged: 0
   anim: {fileID: 3099840988590375666}
   hat0: christmas_hat
   hat1: day hat
@@ -216,7 +217,6 @@ MonoBehaviour:
   hat3: day hat 3
   hat4: day hat 4
   hat: []
-  spriterenderer: {fileID: 9150224694361050721}
 --- !u!95 &3099840988590375666
 Animator:
   serializedVersion: 3

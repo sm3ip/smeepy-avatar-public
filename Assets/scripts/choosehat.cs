@@ -34,6 +34,13 @@ public class choosehat : MonoBehaviour
         choice=0;
     }
     void Update(){
+        if(choice==0){ // modifies the position and scale of the hat ( cuz every sprite doesn't work the same way)
+            transform.localPosition = new Vector3(0.208f,-0.767f,0f);
+            transform.localScale = new Vector3(0.3663104f,0.3663104f,0.6105173f);
+        }else{
+            transform.localPosition = new Vector3(-0.34f,-0.21f,0f);
+            transform.localScale = new Vector3(0.4968834f,0.4968834f,0.8281388f);
+        }
         if(isChoiceChanged){
             anim.Play(hat[choice],0,0f);
             isChoiceChanged=false;
