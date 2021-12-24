@@ -111,6 +111,7 @@ MonoBehaviour:
   parent: {fileID: 5504745706058965716}
   mov: {fileID: 0}
   name_: 
+  isLurking: 0
 --- !u!1 &5379450689349657827
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,6 +123,7 @@ GameObject:
   - component: {fileID: 6336933922798255266}
   - component: {fileID: 9150224694361050721}
   - component: {fileID: 1817357027719005141}
+  - component: {fileID: 3099840988590375666}
   m_Layer: 0
   m_Name: _dayhat
   m_TagString: Untagged
@@ -137,8 +139,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5379450689349657827}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.42, y: 0.12, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalPosition: {x: -0.34, y: -0.21, z: 0}
+  m_LocalScale: {x: 0.49688336, y: 0.49688336, z: 0.82813877}
   m_Children: []
   m_Father: {fileID: 5504745706058965714}
   m_RootOrder: 1
@@ -206,15 +208,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff9d126f14066246bfe0a8d3d7b692b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hat0: {fileID: 21300000, guid: 71d822d10ef51d7439fac2d9aa048b0a, type: 3}
-  hat1: {fileID: 21300000, guid: f1631bc4bd9ce7144a77140786ca9c6e, type: 3}
-  hat2: {fileID: 21300000, guid: 235c4b8f11b3f9b4aa3fc3f92c380b22, type: 3}
-  hat3: {fileID: 21300000, guid: a05944d41332b2b42a26f7830052ca75, type: 3}
-  hat4: {fileID: 21300000, guid: c44b2f8ed45a13b43a1d318501b10d11, type: 3}
   choice: 0
-  Master: {fileID: 0}
-  child: {fileID: 0}
-  spriterenderer: {fileID: 9150224694361050721}
+  isChoiceChanged: 0
+  anim: {fileID: 3099840988590375666}
+  hat0: christmas_hat
+  hat1: day hat
+  hat2: day hat 2
+  hat3: day hat 3
+  hat4: day hat 4
+  hat: []
+--- !u!95 &3099840988590375666
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5379450689349657827}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2795615c9efdf124bb4ece33f9551803, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5504745706058965716
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +351,7 @@ MonoBehaviour:
   hat: {fileID: 0}
   nametag: {fileID: 0}
   doit: {fileID: 0}
+  nameScript: {fileID: 0}
 --- !u!95 &845090696
 Animator:
   serializedVersion: 3
