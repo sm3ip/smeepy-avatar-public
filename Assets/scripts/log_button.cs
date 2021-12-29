@@ -11,9 +11,11 @@ public class log_button : MonoBehaviour
     public GameObject path_input, t_chat; // get the input field and the twitch chat object
     public string[] file; // create an array of string to store the file
     private TwitchChat script_t_chat; // links twitch chat script
+    private database script_db; // links to the db script
  
     void Start(){
         script_t_chat = t_chat.GetComponent<TwitchChat>(); // gets the twitch chat script
+        script_db = GameObject.Find("Main Camera").GetComponent<database>(); // gets the database script
     }
     public void Clicked()
     {
@@ -32,6 +34,7 @@ public class log_button : MonoBehaviour
         */
         // called by clicking the start menu : get the input fields values and modify them in the twitch chat script
         path =path_input.GetComponent<TMP_InputField>().text;
+        script_db.LocateDatabase(path); // gives the folder path to the database script
         file=readFile1(path+"stream.txt"); // reads the file and stores it in an array of strings
         script_t_chat.mod_co_values(file[0], file[1], file[2]); // call the void to modify the login values
     }

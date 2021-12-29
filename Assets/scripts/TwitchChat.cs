@@ -24,10 +24,12 @@ public class TwitchChat : MonoBehaviour
     public int nbMessage; // the number in the message (to choose the hat)
     public bool can_connect; // check if there are values in the input fields to connect to twitch
     public bool didConnect; // check if it connected at least once
+    private database script_db; // the var used to link to the database script
     void Start(){
         // set up some standard values
         can_connect = false;
         didConnect = false;
+        script_db=GameObject.Find("Main Camera").GetComponent<database>(); // gets the database script
     }
     void Update(){
         if (can_connect){ // check if there are values in the input fields
@@ -84,6 +86,7 @@ public class TwitchChat : MonoBehaviour
 
     private void checkUserExist(string name, string message){ // the way used to tell if the viewer already has a chibi in-game
         if (GameObject.Find(name) == null){ // check if there is no instance of the viewer's chibi
+            script_db.FirstAppears(name);// calls the setup void if the soft creates a new chibi gameobject
             g_name = Instantiate(character, new Vector2(tp.transform.position.x, 295.139f), Quaternion.identity); // instantiate a new chibi at the tp position
             g_name.name = name; // gets viewer name to the chibi
         }else{
