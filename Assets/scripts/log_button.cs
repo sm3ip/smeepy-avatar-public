@@ -5,6 +5,7 @@ using TMPro;
 
 public class log_button : MonoBehaviour
 {
+    public string path;
     public GameObject menu; // get the menu
     public bool on_screen= true; // check if the menu is visible
     public GameObject path_input, t_chat; // get the input field and the twitch chat object
@@ -30,7 +31,8 @@ public class log_button : MonoBehaviour
         line 3 : Twitch Chat OAuth Password
         */
         // called by clicking the start menu : get the input fields values and modify them in the twitch chat script
-        file=readFile1(path_input.GetComponent<TMP_InputField>().text); // reads the file and stores it in an array of strings
+        path =path_input.GetComponent<TMP_InputField>().text;
+        file=readFile1(path+"stream.txt"); // reads the file and stores it in an array of strings
         script_t_chat.mod_co_values(file[0], file[1], file[2]); // call the void to modify the login values
     }
 
