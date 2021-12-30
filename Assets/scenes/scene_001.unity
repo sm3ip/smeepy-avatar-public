@@ -582,6 +582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f5261fcc1f5634d9eb121698dd7386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathway: 
+  doCreate: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -784,6 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33900f0d1ea8e72428d4fa2fe4f4e229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  twitchConnect: {fileID: 11400000, guid: 503d20328ba67c04b86fd67d666fddb8, type: 2}
   path: 
   menu: {fileID: 1817325080}
   on_screen: 1

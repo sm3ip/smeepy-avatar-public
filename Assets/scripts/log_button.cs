@@ -5,6 +5,7 @@ using TMPro;
 
 public class log_button : MonoBehaviour
 {
+    [SerializeField] private TwitchConnection twitchConnect;
     public string path;
     public GameObject menu; // get the menu
     public bool on_screen= true; // check if the menu is visible
@@ -36,7 +37,10 @@ public class log_button : MonoBehaviour
         path =path_input.GetComponent<TMP_InputField>().text;
         script_db.LocateDatabase(path); // gives the folder path to the database script
         file=readFile1(path+"stream.txt"); // reads the file and stores it in an array of strings
-        script_t_chat.mod_co_values(file[0], file[1], file[2]); // call the void to modify the login values
+        //script_t_chat.mod_co_values(file[0], file[1], file[2]); // call the void to modify the login values
+        
+        // NEW
+        twitchConnect.SetupVars(file[0], file[2]);
     }
 
     public string[] readFile1( string path)

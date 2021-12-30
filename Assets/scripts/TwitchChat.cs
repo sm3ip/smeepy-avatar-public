@@ -25,6 +25,8 @@ public class TwitchChat : MonoBehaviour
     public bool can_connect; // check if there are values in the input fields to connect to twitch
     public bool didConnect; // check if it connected at least once
     private database script_db; // the var used to link to the database script
+    
+    
     void Start(){
         // set up some standard values
         can_connect = false;
