@@ -64,6 +64,7 @@ public class TwitchChat : MonoBehaviour
         writer.WriteLine("NICK " + username);
         writer.WriteLine("USER " + username + " 8 * :" + username);
         writer.WriteLine("JOIN #" + channelName);
+        writer.WriteLine("PRIVMSG #" + channelName + " :helloooooo");
         writer.Flush();
         can_connect = false;
     }
@@ -84,6 +85,11 @@ public class TwitchChat : MonoBehaviour
         }
     }
 
+    private void WriteInChat(string message)
+    {
+        writer.WriteLine($"PRIVMSG #" + channelName+" :"+ message);
+    }
+
     private void checkUserExist(string name, string message){ // the way used to tell if the viewer already has a chibi in-game
         if (GameObject.Find(name) == null){ // check if there is no instance of the viewer's chibi
             script_db.FirstAppears(name);// calls the setup void if the soft creates a new chibi gameobject
@@ -99,6 +105,7 @@ public class TwitchChat : MonoBehaviour
         switch(message){
             case "!jump": // recognises the jump command
                 viewer_entity.GetComponent<rng_mov>().Jump();   // makes it jump
+                WriteInChat("you jumped !!!!!"); // testing if sending messages works
                 break;
             case string a when a.Contains("!hug"):  // recognises the hug command
                 for (int i = 5; i < message.Length; i++){ // gets the hugged chibi name
