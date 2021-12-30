@@ -66,4 +66,33 @@ public class database : MonoBehaviour
         
         
     }
+
+    public void INeedMore(int amount, string username, string type)
+    {
+        using (var con = new SqliteConnection(pathway))
+        {
+            int stock = 0;
+            con.Open();
+            string stm = "SELECT "+type+" FROM viewers WHERE name ='" + username + "'";
+            using (var cmd= new SqliteCommand(stm, con))
+            {
+                SqliteDataReader reader_ = cmd.ExecuteReader();
+                
+                while (reader_.Read())
+                {
+                    stock = reader_.GetInt32(0);
+                }
+            }
+            con.Close();
+            stock += amount;
+            con.Open();
+            using (var cmd= new SqliteCommand(con))
+            {
+                cmd.CommandText = "UPDATE viewers SET "+type+" = "+stock+" WHERE name = '"+username+"'";
+                print(username);
+                cmd.ExecuteNonQuery();
+            }
+            con.Close();
+        }
+    }
 }
