@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accountName: 
   Token: 
-  lastLine: 
+  logs: []
+  logsIndex: 1
+  isClearLogs: 0

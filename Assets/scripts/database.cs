@@ -95,4 +95,24 @@ public class database : MonoBehaviour
             con.Close();
         }
     }
+
+    public int HowMuch(string username, string type)
+    {
+        using (var con = new SqliteConnection(pathway))
+        {
+            con.Open();
+            string stm = "SELECT " + type + " FROM viewers WHERE name ='" + username + "'";
+            using (var cmd = new SqliteCommand(stm,con))
+            {
+                SqliteDataReader _reader = cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    return _reader.GetInt32(0);
+                }
+            }
+            con.Close();
+        }
+
+        return 0;
+    }
 }

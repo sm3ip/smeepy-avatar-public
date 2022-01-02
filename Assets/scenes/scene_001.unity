@@ -1795,19 +1795,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739fef7ce71942a4e89d64427cbe5d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: 
-  password: 
-  channelName: 
+  _twitchConnection: {fileID: 11400000, guid: 503d20328ba67c04b86fd67d666fddb8, type: 2}
   character: {fileID: 5504745706058965716, guid: e42a70cb07367364b93d12234a266cd3, type: 3}
   g_name: {fileID: 0}
   tp: {fileID: 511555848}
-  time: 0
   viewer_entity: {fileID: 0}
   viewer_entity_hugged: {fileID: 0}
   hugged_name: 
   nbMessage: 0
-  can_connect: 0
-  didConnect: 0
 --- !u!4 &1904597567
 Transform:
   m_ObjectHideFlags: 0
