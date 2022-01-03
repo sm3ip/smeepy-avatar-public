@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 5504745706058965715}
   - component: {fileID: 3523541022297451946}
   - component: {fileID: 845090696}
+  - component: {fileID: 5378399194196216210}
   m_Layer: 0
   m_Name: lil_monster
   m_TagString: Untagged
@@ -352,6 +353,8 @@ MonoBehaviour:
   nametag: {fileID: 0}
   doit: {fileID: 0}
   nameScript: {fileID: 0}
+  countDown: 0
+  db_Script: {fileID: 0}
 --- !u!95 &845090696
 Animator:
   serializedVersion: 3
@@ -371,6 +374,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5378399194196216210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5504745706058965716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c5c1b8ced70704ea0912331f868e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  twitchConnect: {fileID: 11400000, guid: 503d20328ba67c04b86fd67d666fddb8, type: 2}
+  exp: 0
+  expOutOfLvl: 0
+  currentlvl: 0
+  newLvl: 0
+  username: 
+  levels: 
 --- !u!1001 &4404551191845410143
 PrefabInstance:
   m_ObjectHideFlags: 0
