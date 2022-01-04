@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -18,6 +19,7 @@ public class log_button : MonoBehaviour
         script_t_chat = t_chat.GetComponent<TwitchChat>(); // gets the twitch chat script
         script_db = GameObject.Find("Main Camera").GetComponent<database>(); // gets the database script
     }
+
     public void Clicked()
     {
         // called by clicking on the top-right hand corner button and enable/disable the login menu

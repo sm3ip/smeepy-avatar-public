@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accountName: 
   Token: 
-  logs: []
-  logsIndex: 1
-  isClearLogs: 0
+  logs:
+  - :sm3ip!sm3ip@sm3ip.tmi.twitch.tv PRIVMSG #sm3ip :redgg
+  logsIndex: 2
+  isClearLogs: 1

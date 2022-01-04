@@ -14,6 +14,7 @@ public class levelSystem : MonoBehaviour
     public int[] levels;
     private database db_script;
     private rng_mov mov_script;
+    private nametag name_script;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class levelSystem : MonoBehaviour
         countdown = 0;
         levels = new int[13] {750, 935, 1175, 1470, 1830, 2300, 2900, 3600, 4500, 5600, 7000, 8700, 10000 };
         username = gameObject.name;
+        name_script = gameObject.GetComponentInChildren<nametag>();
         CheckLvl();
     }
 
@@ -95,6 +97,7 @@ public class levelSystem : MonoBehaviour
         if (newLvl>currentlvl)
         {
             currentlvl = newLvl;
+            name_script.level = newLvl;
             twitchConnect.WriteInChan("Congrats @"+username+" you've just leveled up (new level : "+newLvl+" )", twitchConnect.accountName);
         }
     }

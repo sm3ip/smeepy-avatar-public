@@ -51,7 +51,7 @@ public class TwitchConnection : ScriptableObject
     }
 
     private string lastLine;
-    [SerializeField] private List<string> logs = new List<string>();
+    [SerializeField] public List<string> logs = new List<string>();
     [SerializeField] private int logsIndex;
     [SerializeField] private bool isClearLogs = false;
 
@@ -90,6 +90,7 @@ public class TwitchConnection : ScriptableObject
         if (logs.Count < logsIndex)
         {
             newMessage = "";
+            ClearLogs();
             return false;
         }
 
