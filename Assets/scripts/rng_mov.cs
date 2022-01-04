@@ -29,12 +29,13 @@ public class rng_mov : MonoBehaviour
     public nametag nameScript; // links to the nametag script
 
     public int countDown = 0;
-
+    public levelSystem lvl_script;
     public database db_Script;
     // Start is called before the first frame update
     void Start()
     {
         db_Script = GameObject.Find("Main Camera").GetComponent<database>();
+        lvl_script = gameObject.GetComponent<levelSystem>();
         // get the chibi's child values
         nametag = gameObject.transform.GetChild(0).gameObject;
         hat = gameObject.transform.GetChild(1).gameObject;
@@ -54,7 +55,6 @@ public class rng_mov : MonoBehaviour
             else
             {
                 db_Script.INeedMore(1,gameObject.name, "gold");
-                db_Script.INeedMore(1, gameObject.name,"exp");
                 countDown = 3600;
             }
         }
@@ -126,7 +126,7 @@ public class rng_mov : MonoBehaviour
         hat.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
         timeNoTalk=21600;
         // adds exp for chat messages
-        db_Script.INeedMore(10,gameObject.name,"exp");
+        lvl_script.MoreExp(10);
     }
     public void GoChooseMyHat(int numb){ // called to switch hat
         doit.chooseMyHat(numb);
