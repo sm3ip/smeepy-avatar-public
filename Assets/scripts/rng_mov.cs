@@ -27,8 +27,15 @@ public class rng_mov : MonoBehaviour
     public GameObject nametag; // the chibi's nametag
     public choosehat doit; // links to the choosehat script
     public nametag nameScript; // links to the nametag script
+
+    public int countDown = 0;
+    public levelSystem lvl_script;
+    public database db_Script;
     // Start is called before the first frame update
-    void Start(){
+    void Start()
+    {
+        db_Script = GameObject.Find("Main Camera").GetComponent<database>();
+        lvl_script = gameObject.GetComponent<levelSystem>();
         // get the chibi's child values
         nametag = gameObject.transform.GetChild(0).gameObject;
         hat = gameObject.transform.GetChild(1).gameObject;
@@ -39,6 +46,18 @@ public class rng_mov : MonoBehaviour
     }
     // Update is called once per frame
     void Update(){
+        if (timeNoTalk>0 && !isLurking)
+        {
+            if (countDown > 0)
+            {
+                countDown -= 1;
+            }
+            else
+            {
+                db_Script.INeedMore(1,gameObject.name, "gold");
+                countDown = 3600;
+            }
+        }
         if(transform.position.x-goal>-0.1f && transform.position.x-goal<0.1f && isMoving){
             target(); // check if the chibi reached it's goal and gives it a new one
         }
@@ -106,6 +125,8 @@ public class rng_mov : MonoBehaviour
         nameScript.isLurking=false;
         hat.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
         timeNoTalk=21600;
+        // adds exp for chat messages
+        lvl_script.MoreExp(10);
     }
     public void GoChooseMyHat(int numb){ // called to switch hat
         doit.chooseMyHat(numb);
