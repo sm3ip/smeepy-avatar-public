@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Mono.Data.Sqlite;
 
@@ -27,7 +28,7 @@ public class database : MonoBehaviour
         using (var con = new SqliteConnection(pathway))
         {
             con.Open();
-            string stm="SELECT id FROM viewers WHERE name = '"+name+"'";
+            string stm="SELECT view_id FROM viewers WHERE view_name = '"+name+"'";
             using (var cmd = new SqliteCommand(stm, con))
             {
                 SqliteDataReader reader_ = cmd.ExecuteReader();
@@ -41,7 +42,6 @@ public class database : MonoBehaviour
                 }else
                 {
                     doCreate = false;
-                    print("already in database");
                 }
             }
             con.Close();
@@ -50,21 +50,17 @@ public class database : MonoBehaviour
                 con.Open();
                 using (var cmd= new SqliteCommand(con))
                 {
-                    cmd.CommandText = "INSERT INTO viewers(name, level, exp, gold) VALUES(@name, @level, @exp, @gold)";
+                    cmd.CommandText = "INSERT INTO viewers(view_name, view_level, view_exp, view_gold) VALUES(@name, @level, @exp, @gold)";
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@level", 0);
                     cmd.Parameters.AddWithValue("@exp", 0);
                     cmd.Parameters.AddWithValue("@gold", 0);
                     cmd.Prepare();
                     cmd.ExecuteNonQuery();
-                    
                 }
                 con.Close();
-                
             }
         }
-        
-        
     }
 
     public void INeedMore(int amount, string username, string type)
@@ -73,7 +69,7 @@ public class database : MonoBehaviour
         {
             int stock = 0;
             con.Open();
-            string stm = "SELECT "+type+" FROM viewers WHERE name ='" + username + "'";
+            string stm = "SELECT "+type+" FROM viewers WHERE view_name ='" + username + "'";
             using (var cmd= new SqliteCommand(stm, con))
             {
                 SqliteDataReader reader_ = cmd.ExecuteReader();
@@ -88,7 +84,7 @@ public class database : MonoBehaviour
             con.Open();
             using (var cmd= new SqliteCommand(con))
             {
-                cmd.CommandText = "UPDATE viewers SET "+type+" = "+stock+" WHERE name = '"+username+"'";
+                cmd.CommandText = "UPDATE viewers SET "+type+" = "+stock+" WHERE view_name = '"+username+"'";
                 cmd.ExecuteNonQuery();
             }
             con.Close();
@@ -100,7 +96,7 @@ public class database : MonoBehaviour
         using (var con = new SqliteConnection(pathway))
         {
             con.Open();
-            string stm = "SELECT " + type + " FROM viewers WHERE name ='" + username + "'";
+            string stm = "SELECT " + type + " FROM viewers WHERE view_name ='" + username + "'";
             using (var cmd = new SqliteCommand(stm,con))
             {
                 SqliteDataReader _reader = cmd.ExecuteReader();
@@ -122,10 +118,32 @@ public class database : MonoBehaviour
             con.Open();
             using (var cmd = new SqliteCommand(con))
             {
-                cmd.CommandText = "UPDATE viewers SET " + type + " = " + value + " WHERE name = '" + username + "'";
+                cmd.CommandText = "UPDATE viewers SET " + type + " = " + value + " WHERE view_name = '" + username + "'";
                 cmd.ExecuteNonQuery();
             }
             con.Close();
         }
+    }
+
+    public List<string> GetInventory(string username, string objectType)
+    {
+        List<string> myInventory = new List<string>();
+        using (var con = new SqliteConnection(pathway))
+        {
+            con.Open();
+            string stm = "SELECT obj_name FROM objects AS o INNER JOIN objectTypes AS ot ON o.type_id_ob = ot.OTid INNER JOIN hasObject AS ho ON o.obj_id = ho.id_object_ho INNER JOIN viewers AS v ON ho.id_viewer_ho = v.view_id"+" WHERE ot.OTName ='"+objectType+"' AND v.view_name ='"+username+"'";
+            using (var cmd = new SqliteCommand(stm,con))
+            {
+                SqliteDataReader _reader = cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    myInventory.Add(_reader.GetString(0));
+                }
+            }
+            // find a way to good inner join
+            con.Close();
+        }
+
+        return myInventory;
     }
 }
