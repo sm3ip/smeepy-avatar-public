@@ -54,4 +54,29 @@ public class InventorySystem : MonoBehaviour
         db_script.INeedMore(amount, gameObject.name,"view_gold");
         golds += amount;
     }
+
+    public string TellInventory()
+    {
+        string inventory = " Your inventory contains : ";
+        foreach (var obj in hatInventory)
+        {
+            inventory += " -"+obj + " ";
+        }
+
+        foreach (var obj1 in maskInventory)
+        {
+            inventory += " -"+obj1 + " ";
+        }
+
+        foreach (var obj2 in appearInventory)
+        {
+            inventory += " -"+obj2 + " ";
+        }
+
+        if (inventory==" Your inventory contains : ")
+        {
+            inventory = " Your inventory is empty, try buying some things and come back later ;3";
+        }
+        return inventory;
+    }
 }

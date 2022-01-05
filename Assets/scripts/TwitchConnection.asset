@@ -15,6 +15,6 @@ MonoBehaviour:
   accountName: 
   Token: 
   logs:
-  - :sm3ip!sm3ip@sm3ip.tmi.twitch.tv PRIVMSG #sm3ip :redgg
+  - :sm3ip!sm3ip@sm3ip.tmi.twitch.tv PRIVMSG #sm3ip :!inventory
   logsIndex: 2
   isClearLogs: 1
