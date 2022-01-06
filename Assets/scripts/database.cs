@@ -27,7 +27,7 @@ public class database : MonoBehaviour
         using (var con = new SqliteConnection(pathway))
         {
             con.Open();
-            string stm="SELECT id FROM viewers WHERE name = '"+name+"'";
+            string stm="SELECT view_id FROM viewers WHERE view_name = '"+name+"'";
             using (var cmd = new SqliteCommand(stm, con))
             {
                 SqliteDataReader reader_ = cmd.ExecuteReader();
@@ -50,7 +50,7 @@ public class database : MonoBehaviour
                 con.Open();
                 using (var cmd= new SqliteCommand(con))
                 {
-                    cmd.CommandText = "INSERT INTO viewers(name, level, exp, gold) VALUES(@name, @level, @exp, @gold)";
+                    cmd.CommandText = "INSERT INTO viewers(view_name, view_level, view_exp, view_gold) VALUES(@name, @level, @exp, @gold)";
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@level", 0);
                     cmd.Parameters.AddWithValue("@exp", 0);
@@ -73,7 +73,7 @@ public class database : MonoBehaviour
         {
             int stock = 0;
             con.Open();
-            string stm = "SELECT "+type+" FROM viewers WHERE name ='" + username + "'";
+            string stm = "SELECT "+type+" FROM viewers WHERE view_name ='" + username + "'";
             using (var cmd= new SqliteCommand(stm, con))
             {
                 SqliteDataReader reader_ = cmd.ExecuteReader();
@@ -88,7 +88,7 @@ public class database : MonoBehaviour
             con.Open();
             using (var cmd= new SqliteCommand(con))
             {
-                cmd.CommandText = "UPDATE viewers SET "+type+" = "+stock+" WHERE name = '"+username+"'";
+                cmd.CommandText = "UPDATE viewers SET "+type+" = "+stock+" WHERE view_name = '"+username+"'";
                 cmd.ExecuteNonQuery();
             }
             con.Close();
@@ -100,7 +100,7 @@ public class database : MonoBehaviour
         using (var con = new SqliteConnection(pathway))
         {
             con.Open();
-            string stm = "SELECT " + type + " FROM viewers WHERE name ='" + username + "'";
+            string stm = "SELECT " + type + " FROM viewers WHERE view_name ='" + username + "'";
             using (var cmd = new SqliteCommand(stm,con))
             {
                 SqliteDataReader _reader = cmd.ExecuteReader();
@@ -122,14 +122,12 @@ public class database : MonoBehaviour
             con.Open();
             using (var cmd = new SqliteCommand(con))
             {
-                cmd.CommandText = "UPDATE viewers SET " + type + " = " + value + " WHERE name = '" + username + "'";
+                cmd.CommandText = "UPDATE viewers SET " + type + " = " + value + " WHERE view_name = '" + username + "'";
                 cmd.ExecuteNonQuery();
             }
             con.Close();
         }
     }
-<<<<<<< Updated upstream
-=======
 
     public List<string> GetInventory(string username, string objectType)
     {
@@ -146,7 +144,6 @@ public class database : MonoBehaviour
                     myInventory.Add(_reader.GetString(0));
                 }
             }
-            // find a way to good inner join
             con.Close();
         }
 
@@ -233,5 +230,4 @@ public class database : MonoBehaviour
         }
         SetValue(username, newMoney, "view_gold");
     }
->>>>>>> Stashed changes
 }

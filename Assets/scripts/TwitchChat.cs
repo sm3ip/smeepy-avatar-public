@@ -45,13 +45,19 @@ public class TwitchChat : MonoBehaviour
                 viewer_entity.GetComponent<rng_mov>().Jump();                                                           // makes it jump
                 break;
             case "!gold": // recognises the gold command
-                _twitchConnection.WriteInChan("@"+name+" you have "+script_db.HowMuch(name, "gold") + "golds", _twitchConnection.accountName);
+                _twitchConnection.WriteInChan("@"+name+" you have "+GameObject.Find(name).GetComponent<InventorySystem>().golds + " golds", _twitchConnection.accountName);
                 break;
             case "!exp": // recognises the exp command
-                _twitchConnection.WriteInChan("@"+name+" you have "+script_db.HowMuch(name, "exp") + "exp", _twitchConnection.accountName);
+                _twitchConnection.WriteInChan("@"+name+" you have "+GameObject.Find(name).GetComponent<levelSystem>().exp + " exp", _twitchConnection.accountName);
+                break;
+            case "!lvl":
+                _twitchConnection.WriteInChan("@"+name+" you are level "+ GameObject.Find(name).GetComponent<levelSystem>().currentlvl, _twitchConnection.accountName);
                 break;
             case "!shop": // recognises the shop command
                 _twitchConnection.WriteInChan("@"+name+ script_db.GetShop(), _twitchConnection.accountName);
+                break;
+            case "!inventory":
+                _twitchConnection.WriteInChan("@"+name+ GameObject.Find(name).GetComponent<InventorySystem>().TellInventory(), _twitchConnection.accountName);
                 break;
             case string a when a.Contains("!hug"):                                                                      // recognises the hug command
                 for (int i = 5; i < message.Length; i++){                                                               // gets the hugged chibi name

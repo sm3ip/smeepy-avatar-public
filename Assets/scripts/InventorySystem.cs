@@ -128,6 +128,9 @@ public class InventorySystem : MonoBehaviour
             }else if (!itemExist)
             {
                 _twitchConnection.WriteInChan("@"+gameObject.name+" It looks like this item doesn't exist",_twitchConnection.accountName);
+            }else 
+            {
+                _twitchConnection.WriteInChan("@"+gameObject.name+" It looks like you don't have enough money to buy it", _twitchConnection.accountName);
             }
         }
     }

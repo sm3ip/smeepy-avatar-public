@@ -46,18 +46,6 @@ public class rng_mov : MonoBehaviour
     }
     // Update is called once per frame
     void Update(){
-        if (timeNoTalk>0 && !isLurking)
-        {
-            if (countDown > 0)
-            {
-                countDown -= 1;
-            }
-            else
-            {
-                db_Script.INeedMore(1,gameObject.name, "gold");
-                countDown = 3600;
-            }
-        }
         if(transform.position.x-goal>-0.1f && transform.position.x-goal<0.1f && isMoving){
             target(); // check if the chibi reached it's goal and gives it a new one
         }
