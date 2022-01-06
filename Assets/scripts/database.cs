@@ -233,5 +233,8 @@ public class database : MonoBehaviour
         }
         SetValue(username, newMoney, "view_gold");
     }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
