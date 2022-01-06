@@ -45,20 +45,13 @@ public class TwitchChat : MonoBehaviour
                 viewer_entity.GetComponent<rng_mov>().Jump();                                                           // makes it jump
                 break;
             case "!gold": // recognises the gold command
-                string gold = GameObject.Find(name).GetComponent<InventorySystem>().golds.ToString();
-                _twitchConnection.WriteInChan("@"+name+" you have "+ gold + "golds", _twitchConnection.accountName);
+                _twitchConnection.WriteInChan("@"+name+" you have "+script_db.HowMuch(name, "gold") + "golds", _twitchConnection.accountName);
                 break;
             case "!exp": // recognises the exp command
-                string exp = GameObject.Find(name).GetComponent<levelSystem>().exp.ToString();
-                _twitchConnection.WriteInChan("@"+name+" you have "+exp + "exp", _twitchConnection.accountName);
+                _twitchConnection.WriteInChan("@"+name+" you have "+script_db.HowMuch(name, "exp") + "exp", _twitchConnection.accountName);
                 break;
-            case "!lvl": // recognises the lvl command
-                string lvl = GameObject.Find(name).GetComponent<levelSystem>().currentlvl.ToString();
-                _twitchConnection.WriteInChan("@"+name+" you are level "+lvl, _twitchConnection.accountName);
-                break;
-            case "!inventory": //recognises the inventory command
-                string inventory = GameObject.Find(name).GetComponent<InventorySystem>().TellInventory();
-                _twitchConnection.WriteInChan("@"+name+ inventory,_twitchConnection.accountName);
+            case "!shop": // recognises the shop command
+                _twitchConnection.WriteInChan("@"+name+ script_db.GetShop(), _twitchConnection.accountName);
                 break;
             case string a when a.Contains("!hug"):                                                                      // recognises the hug command
                 for (int i = 5; i < message.Length; i++){                                                               // gets the hugged chibi name
@@ -83,6 +76,9 @@ public class TwitchChat : MonoBehaviour
                 if (Int32.TryParse(message, out nbMessage)){                                                            // check if it's parsable
                     viewer_entity.GetComponent<rng_mov>().GoChooseMyHat(nbMessage);                                     // gets it a new hat
                 }
+                break;
+            case string e when e.StartsWith("!buy "):
+                GameObject.Find(name).GetComponent<InventorySystem>().BuyItem(message.Substring(5));
                 break;
         }
         // reset the containers so it doesn't lag later on

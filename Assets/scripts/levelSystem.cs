@@ -47,7 +47,7 @@ public class levelSystem : MonoBehaviour
 
     public void MoreExp(int amount)
     {
-        db_script.INeedMore(amount,gameObject.name,"view_exp");
+        db_script.INeedMore(amount,gameObject.name,"exp");
         expOutOfLvl += amount;
     }
     public void CheckExpOutOfLvl()
@@ -70,9 +70,9 @@ public class levelSystem : MonoBehaviour
 
     void CheckLvl()
     {
-        currentlvl=db_script.HowMuch(username, "view_level");
+        currentlvl=db_script.HowMuch(username, "level");
         newLvl = currentlvl;
-        exp = db_script.HowMuch(username, "view_exp");
+        exp = db_script.HowMuch(username, "exp");
         expOutOfLvl = exp;
         for (int i = 0; i < newLvl; i++)
         {
@@ -93,7 +93,7 @@ public class levelSystem : MonoBehaviour
             expOutOfLvl -= levels[levels.Length-1];
             newLvl += 1;
         }
-        db_script.SetValue(username,newLvl,"view_level");
+        db_script.SetValue(username,newLvl,"level");
         if (newLvl>currentlvl)
         {
             currentlvl = newLvl;

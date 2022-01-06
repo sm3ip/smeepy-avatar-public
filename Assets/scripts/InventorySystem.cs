@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class InventorySystem : MonoBehaviour
 
     private int countdown;
     public int golds;
+    public List<string[]> shop;
     public List<string> hatInventory;
     public List<string> maskInventory;
     public List<string> appearInventory;
@@ -21,6 +23,7 @@ public class InventorySystem : MonoBehaviour
         db_script = GameObject.Find("Main Camera").GetComponent<database>();
         mov_script = gameObject.GetComponent<rng_mov>();
         name_script = gameObject.GetComponentInChildren<nametag>();
+        shop = db_script.GetWholeShop();
         CheckInventory();
     }
 
@@ -78,5 +81,54 @@ public class InventorySystem : MonoBehaviour
             inventory = " Your inventory is empty, try buying some things and come back later ;3";
         }
         return inventory;
+    }
+
+    public bool IsItemOwned(string item)
+    {
+        return (hatInventory.Contains(item) || maskInventory.Contains(item) || appearInventory.Contains(item));
+    }
+
+    public void BuyItem(string item)
+    {
+        if (IsItemOwned(item))
+        {
+            _twitchConnection.WriteInChan("@"+gameObject.name+" You already own this item", _twitchConnection.accountName);
+        }
+        else
+        {
+            bool itemExist = false;
+            string[] itemChosen = new string[]{};
+            foreach (var product in shop)
+            {
+                if (product[0]==item)
+                {
+                    itemChosen = product;
+                    itemExist = true;
+                }
+                
+            }
+
+            if (itemExist && Convert.ToInt32(itemChosen[1])<=golds)
+            {
+                golds -= Convert.ToInt32(itemChosen[1]);
+                db_script.BuyItem(itemChosen[0],golds-Convert.ToInt32(itemChosen[1]), gameObject.name);
+                switch (itemChosen[2])
+                {
+                    case "hat":
+                        hatInventory.Add(itemChosen[0]);
+                        break;
+                    case "mask":
+                        maskInventory.Add(itemChosen[0]);
+                        break;
+                    case "appear_anim":
+                        appearInventory.Add(itemChosen[0]);
+                        break;
+                }
+                _twitchConnection.WriteInChan("@"+gameObject.name+" you successfully bought "+itemChosen[0], _twitchConnection.accountName);
+            }else if (!itemExist)
+            {
+                _twitchConnection.WriteInChan("@"+gameObject.name+" It looks like this item doesn't exist",_twitchConnection.accountName);
+            }
+        }
     }
 }
