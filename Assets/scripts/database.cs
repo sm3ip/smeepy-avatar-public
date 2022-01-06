@@ -128,8 +128,6 @@ public class database : MonoBehaviour
             con.Close();
         }
     }
-<<<<<<< Updated upstream
-=======
 
     public List<string> GetInventory(string username, string objectType)
     {
@@ -233,17 +231,4 @@ public class database : MonoBehaviour
         }
         SetValue(username, newMoney, "view_gold");
     }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }

@@ -53,18 +53,7 @@ public class TwitchChat : MonoBehaviour
             case "!shop": // recognises the shop command
                 _twitchConnection.WriteInChan("@"+name+ script_db.GetShop(), _twitchConnection.accountName);
                 break;
-            case "!shop": // recognises the shop command
-                _twitchConnection.WriteInChan("@"+name+ script_db.GetShop(), _twitchConnection.accountName);
-                break;
-            case "!shop": // recognises the shop command
-                _twitchConnection.WriteInChan("@"+name+ script_db.GetShop(), _twitchConnection.accountName);
-                break;
-            case "!shop": // recognises the shop command
-                _twitchConnection.WriteInChan("@"+name+ script_db.GetShop(), _twitchConnection.accountName);
-                break;
-            case "!shop": // recognises the shop command
-                _twitchConnection.WriteInChan("@"+name+ script_db.GetShop(), _twitchConnection.accountName);
-                break;
+            
             case string a when a.Contains("!hug"):                                                                      // recognises the hug command
                 for (int i = 5; i < message.Length; i++){                                                               // gets the hugged chibi name
                     if(message[i]!='@'){                                                                                // removes the @
