@@ -111,7 +111,7 @@ public class InventorySystem : MonoBehaviour
             if (itemExist && Convert.ToInt32(itemChosen[1])<=golds)
             {
                 golds -= Convert.ToInt32(itemChosen[1]);
-                db_script.BuyItem(itemChosen[0],golds-Convert.ToInt32(itemChosen[1]), gameObject.name);
+                db_script.BuyItem(itemChosen[0],golds, gameObject.name);
                 switch (itemChosen[2])
                 {
                     case "hat":

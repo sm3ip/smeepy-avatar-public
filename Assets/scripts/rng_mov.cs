@@ -28,13 +28,14 @@ public class rng_mov : MonoBehaviour
     public choosehat doit; // links to the choosehat script
     public nametag nameScript; // links to the nametag script
 
-    public int countDown = 0;
+   
     public levelSystem lvl_script;
-    public database db_Script;
+
+    public InventorySystem inv_script;
     // Start is called before the first frame update
     void Start()
     {
-        db_Script = GameObject.Find("Main Camera").GetComponent<database>();
+        inv_script = gameObject.GetComponent<InventorySystem>();
         lvl_script = gameObject.GetComponent<levelSystem>();
         // get the chibi's child values
         nametag = gameObject.transform.GetChild(0).gameObject;
@@ -115,9 +116,9 @@ public class rng_mov : MonoBehaviour
         timeNoTalk=21600;
         // adds exp for chat messages
         lvl_script.MoreExp(10);
-    }
-    public void GoChooseMyHat(int numb){ // called to switch hat
-        doit.chooseMyHat(numb);
+        //print(gameObject.name);
+        //print("more goldddddd");
+        inv_script.addGold(4);
     }
     public void Jump(){
         StartCoroutine(anim(2,"monster_jump"));

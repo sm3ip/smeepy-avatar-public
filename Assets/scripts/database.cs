@@ -230,4 +230,26 @@ public class database : MonoBehaviour
         }
         SetValue(username, newMoney, "view_gold");
     }
+
+    public float[] GetCoords(string objName)
+    {
+        float[] coords = new float[]{};
+        using (var con = new SqliteConnection(pathway))
+        {
+            con.Open();
+            string stm = "SELECT localPosition_x, localPosition_y, localPosition_z, localScale_x, localScale_y, localScale_z FROM objects WHERE obj_name='"+objName+"'";
+            using (var cmd = new SqliteCommand(stm,con))
+            {
+                SqliteDataReader _reader = cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    coords = new float[] {_reader.GetFloat(0),_reader.GetFloat(1),_reader.GetFloat(2), _reader.GetFloat(3), _reader.GetFloat(4), _reader.GetFloat(5) };
+                    
+                }
+            }
+            con.Close();
+        }
+
+        return coords;
+    }
 }

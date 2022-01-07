@@ -42,7 +42,7 @@ public class log_button : MonoBehaviour
         //script_t_chat.mod_co_values(file[0], file[1], file[2]); // call the void to modify the login values
         
         // NEW
-        twitchConnect.SetupVars(file[0], file[2]);
+        twitchConnect.SetupVars(file[0], file[1]);
     }
 
     public string[] readFile1( string path)

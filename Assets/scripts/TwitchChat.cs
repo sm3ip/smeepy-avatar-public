@@ -45,19 +45,19 @@ public class TwitchChat : MonoBehaviour
                 viewer_entity.GetComponent<rng_mov>().Jump();                                                           // makes it jump
                 break;
             case "!gold": // recognises the gold command
-                _twitchConnection.WriteInChan("@"+name+" you have "+GameObject.Find(name).GetComponent<InventorySystem>().golds + " golds", _twitchConnection.accountName);
+                _twitchConnection.WriteInChan("@"+name+" you have "+viewer_entity.GetComponent<InventorySystem>().golds + " golds", _twitchConnection.accountName);
                 break;
             case "!exp": // recognises the exp command
-                _twitchConnection.WriteInChan("@"+name+" you have "+GameObject.Find(name).GetComponent<levelSystem>().exp + " exp", _twitchConnection.accountName);
+                _twitchConnection.WriteInChan("@"+name+" you have "+viewer_entity.GetComponent<levelSystem>().exp + " exp", _twitchConnection.accountName);
                 break;
             case "!lvl":
-                _twitchConnection.WriteInChan("@"+name+" you are level "+ GameObject.Find(name).GetComponent<levelSystem>().currentlvl, _twitchConnection.accountName);
+                _twitchConnection.WriteInChan("@"+name+" you are level "+ viewer_entity.GetComponent<levelSystem>().currentlvl, _twitchConnection.accountName);
                 break;
             case "!shop": // recognises the shop command
                 _twitchConnection.WriteInChan("@"+name+ script_db.GetShop(), _twitchConnection.accountName);
                 break;
             case "!inventory":
-                _twitchConnection.WriteInChan("@"+name+ GameObject.Find(name).GetComponent<InventorySystem>().TellInventory(), _twitchConnection.accountName);
+                _twitchConnection.WriteInChan("@"+name+ viewer_entity.GetComponent<InventorySystem>().TellInventory(), _twitchConnection.accountName);
                 break;
             case string a when a.Contains("!hug"):                                                                      // recognises the hug command
                 for (int i = 5; i < message.Length; i++){                                                               // gets the hugged chibi name
@@ -77,14 +77,18 @@ public class TwitchChat : MonoBehaviour
             case string c when c.Contains("!unlurk"):                                                                   // recognises unlurk command
                 viewer_entity.GetComponent<rng_mov>().isLurking = false;                                                // gets it out of lurking
                 break;
-            case string d when d.Contains("!hat"):                                                                      // recognises the hat command
-                message = message.Substring(4);                                                                         // gets the number of the hat
-                if (Int32.TryParse(message, out nbMessage)){                                                            // check if it's parsable
-                    viewer_entity.GetComponent<rng_mov>().GoChooseMyHat(nbMessage);                                     // gets it a new hat
-                }
-                break;
             case string e when e.StartsWith("!buy "):
-                GameObject.Find(name).GetComponent<InventorySystem>().BuyItem(message.Substring(5));
+                viewer_entity.GetComponent<InventorySystem>().BuyItem(message.Substring(5));
+                break;
+            case string f when f.StartsWith("!equipHAT "):
+                if (viewer_entity.GetComponent<InventorySystem>().IsItemOwned(message.Substring(10)))
+                {
+                    viewer_entity.GetComponentInChildren<choosehat>().SwitchHat(message.Substring(10),script_db.GetCoords(message.Substring(10)));
+                }
+                else
+                {
+                    _twitchConnection.WriteInChan("@"+name+" it looks like you don't own that hat or it doesn't exist ", _twitchConnection.accountName);
+                }
                 break;
         }
         // reset the containers so it doesn't lag later on

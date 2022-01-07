@@ -1,0 +1,2 @@
+The channel name you wanna connect your smeepy avatar to
+oauth:the oauth key of the account you'll use  to read chat and write in chat (if you use a bot account make sure it is mod on your channel)
