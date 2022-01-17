@@ -84,6 +84,7 @@ public class TwitchChat : MonoBehaviour
                 if (viewer_entity.GetComponent<InventorySystem>().IsItemOwned(message.Substring(10)))
                 {
                     viewer_entity.GetComponentInChildren<choosehat>().SwitchHat(message.Substring(10),script_db.GetCoords(message.Substring(10)));
+                    script_db.EquipObj(message.Substring(10),viewer_entity.name);
                 }
                 else
                 {

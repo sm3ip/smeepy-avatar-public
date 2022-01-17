@@ -15,7 +15,6 @@ MonoBehaviour:
   accountName: 
   Token: 
   logs:
-  - PING :tmi.twitch.tv
-  - :tmi.twitch.tv PONG tmi.twitch.tv :tmi.twitch.tv
-  logsIndex: 1
-  isClearLogs: 0
+  - :sm3ip!sm3ip@sm3ip.tmi.twitch.tv PRIVMSG #sm3ip :!equipHAT party_hat_light_blue
+  logsIndex: 2
+  isClearLogs: 1

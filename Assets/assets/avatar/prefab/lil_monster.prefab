@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325778482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.38, y: 2.21, z: 0}
+  m_LocalPosition: {x: -0.38, y: 0.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5504745706058965714}
@@ -84,7 +84,7 @@ TextMesh:
   m_GameObject: {fileID: 1325778482}
   m_Text: test
   m_OffsetZ: 0
-  m_CharacterSize: 1.5
+  m_CharacterSize: 0.5
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
@@ -352,9 +352,8 @@ MonoBehaviour:
   nametag: {fileID: 0}
   doit: {fileID: 0}
   nameScript: {fileID: 0}
-  countDown: 0
   lvl_script: {fileID: 0}
-  db_Script: {fileID: 0}
+  inv_script: {fileID: 0}
 --- !u!114 &6618782017113359196
 MonoBehaviour:
   m_ObjectHideFlags: 0

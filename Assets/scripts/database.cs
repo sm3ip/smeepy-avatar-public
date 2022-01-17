@@ -252,4 +252,91 @@ public class database : MonoBehaviour
 
         return coords;
     }
+
+    public void EquipObj(string objName, string viewName)
+    {
+        int idObj = 0;
+        int ObjType = 0;
+        int idView = 0;
+        List<int> typesWear = new List<int>();
+        List<int> idsHO = new List<int>();
+        bool isTaskDone = false;
+        using (var con = new SqliteConnection(pathway))
+        {
+            
+            con.Open();
+            string stm = "SELECT obj_id, type_id_ob FROM objects WHERE obj_name = '" + objName + "'";
+            using (var cmd = new SqliteCommand(stm,con))
+            {
+                SqliteDataReader _reader = cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    idObj = _reader.GetInt32(0);
+                    ObjType = _reader.GetInt32(1);
+                }   
+            }
+
+            stm = "SELECT view_id FROM viewers WHERE view_name = '" + viewName + "'";
+            using (var cmd = new SqliteCommand(stm,con))
+            {
+                SqliteDataReader _reader = cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    idView = _reader.GetInt32(0);
+                }   
+            }
+
+            stm =
+                "SELECT type_id_ob, idOE FROM objects AS o INNER JOIN ObjectEquipped AS h ON o.obj_id = h.idObjectOE WHERE h.idViewerOE = " + idView;
+            using (var cmd = new SqliteCommand(stm, con))
+            {
+                SqliteDataReader _reader = cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    typesWear.Add(_reader.GetInt32(0));
+                    idsHO.Add(_reader.GetInt32(1));
+                }
+            }
+            con.Close();
+        }
+
+        for (int i = 0; i < typesWear.Count; i++)
+        {
+            if (typesWear[i]==ObjType)
+            {
+                updateHO(idsHO[i],idView,idObj);
+                isTaskDone = true;
+            }
+        }
+        if (!isTaskDone)
+        {
+            using (var con = new SqliteConnection(pathway))
+            {
+                con.Open();
+                using (var cmd = new SqliteCommand(con))
+                {
+                    cmd.CommandText = "INSERT INTO ObjectEquipped (idViewerOE,idObjectOE) VALUES (@idView, @idObj)";
+                    cmd.Parameters.AddWithValue("@idView", idView);
+                    cmd.Parameters.AddWithValue("@idObj", idObj);
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+    }
+
+    public void updateHO(int idHO, int viewer, int obj)
+    {
+        using (var con = new SqliteConnection(pathway))
+        {
+            con.Open();
+            using (var cmd = new SqliteCommand(con))
+            {
+                cmd.CommandText = "UPDATE ObjectEquipped SET idViewerOE = "+ viewer+", idObjectOE = "+ obj + " WHERE idOE = "+idHO;
+                cmd.ExecuteNonQuery();
+            }
+            con.Close();
+        }
+    }
 }
