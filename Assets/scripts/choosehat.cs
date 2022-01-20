@@ -11,6 +11,7 @@ public class choosehat : MonoBehaviour
 {
     public bool isChoiceChanged; // ables to switch animation when needed and avoids to freeze the current one
     public Animator anim;
+    public int switchesHat = 0;
 
     // NEW WAY
     public string currentHat;
@@ -26,6 +27,12 @@ public class choosehat : MonoBehaviour
         //getting all the hats in the list (gotta find a more efficient way)
     }
     void Update(){
+        if (switchesHat>0)
+        {
+            NoHat = false;
+            isChoiceChanged = true;
+            switchesHat = 0;
+        }
         if (!NoHat)
         {
             transform.localPosition = new Vector3(hatCoords[0],hatCoords[1],hatCoords[2]);
@@ -44,5 +51,6 @@ public class choosehat : MonoBehaviour
         currentHat = name;
         isChoiceChanged = true;
         NoHat = false;
+        switchesHat += 1;
     }
 }

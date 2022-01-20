@@ -25,6 +25,7 @@ public class InventorySystem : MonoBehaviour
         name_script = gameObject.GetComponentInChildren<nametag>();
         shop = db_script.GetWholeShop();
         CheckInventory();
+        GetEquipped();
     }
 
     // Update is called once per frame
@@ -131,6 +132,26 @@ public class InventorySystem : MonoBehaviour
             }else 
             {
                 _twitchConnection.WriteInChan("@"+gameObject.name+" It looks like you don't have enough money to buy it", _twitchConnection.accountName);
+            }
+        }
+    }
+
+    public void GetEquipped()
+    {
+        print("got equipped");
+        List<string> objEquipped = db_script.CheckObjEquipped(gameObject.name);
+        foreach (string obj in objEquipped)
+        {
+            print(obj);
+        }
+        for (int i = 1; i < objEquipped.Count; i+=2)
+        {
+            switch (objEquipped[i])
+            {
+                case "hat":
+                    print("am in");
+                    gameObject.GetComponentInChildren<choosehat>().SwitchHat(objEquipped[i-1],db_script.GetCoords(objEquipped[i-1]));
+                    break;
             }
         }
     }

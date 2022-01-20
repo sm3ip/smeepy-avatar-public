@@ -304,7 +304,7 @@ public class database : MonoBehaviour
         {
             if (typesWear[i]==ObjType)
             {
-                updateHO(idsHO[i],idView,idObj);
+                updateOE(idsHO[i],idView,idObj);
                 isTaskDone = true;
             }
         }
@@ -326,17 +326,50 @@ public class database : MonoBehaviour
         }
     }
 
-    public void updateHO(int idHO, int viewer, int obj)
+    public void updateOE(int idOE, int viewer, int obj)
     {
         using (var con = new SqliteConnection(pathway))
         {
             con.Open();
             using (var cmd = new SqliteCommand(con))
             {
-                cmd.CommandText = "UPDATE ObjectEquipped SET idViewerOE = "+ viewer+", idObjectOE = "+ obj + " WHERE idOE = "+idHO;
+                cmd.CommandText = "UPDATE ObjectEquipped SET idViewerOE = "+ viewer+", idObjectOE = "+ obj + " WHERE idOE = "+idOE;
                 cmd.ExecuteNonQuery();
             }
             con.Close();
         }
+    }
+
+    public List<string> CheckObjEquipped(string username)
+    {
+        List<string> objects = new List<string>();
+        int id_user = 0;
+        using (var con = new SqliteConnection(pathway))
+        {
+            con.Open();
+            string stm = "SELECT view_id FROM viewers WHERE view_name = '"+username+"'";
+            using (var cmd = new SqliteCommand(stm,con))
+            {
+                SqliteDataReader _reader = cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    id_user = _reader.GetInt32(0);
+                }
+            }
+
+            stm = "SELECT obj_name, OTName FROM ObjectEquipped AS e INNER JOIN objects AS o ON e.idObjectOE = o.obj_id INNER JOIN objectTypes AS t ON o.type_id_ob = t.OTid WHERE e.idViewerOE = " + id_user;
+            using (var cmd = new SqliteCommand(stm, con))
+            {
+                SqliteDataReader _reader = cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    objects.Add(_reader.GetString(0));
+                    objects.Add(_reader.GetString(1));
+                }
+            }
+            con.Close();
+        }
+
+        return objects;
     }
 }

@@ -15,6 +15,8 @@ MonoBehaviour:
   accountName: 
   Token: 
   logs:
-  - :sm3ip!sm3ip@sm3ip.tmi.twitch.tv PRIVMSG #sm3ip :!equipHAT party_hat_light_blue
-  logsIndex: 2
+  - 
+  - 
+  - 
+  logsIndex: 4
   isClearLogs: 1
