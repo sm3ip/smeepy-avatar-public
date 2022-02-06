@@ -15,8 +15,8 @@ MonoBehaviour:
   accountName: 
   Token: 
   logs:
-  - 
-  - 
-  - 
+  - :sm3ip!sm3ip@sm3ip.tmi.twitch.tv JOIN #sm3ip
+  - :sm3ip.tmi.twitch.tv 353 sm3ip = #sm3ip :sm3ip
+  - :sm3ip.tmi.twitch.tv 366 sm3ip #sm3ip :End of /NAMES list
   logsIndex: 4
   isClearLogs: 1

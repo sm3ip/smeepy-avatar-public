@@ -31,7 +31,7 @@ public class TwitchChat : MonoBehaviour
     private void checkUserExist(string name, string message){                                                           // the way used to tell if the viewer already has a chibi in-game
         if (GameObject.Find(name) == null){                                                                             // check if there is no instance of the viewer's chibi
             script_db.FirstAppears(name);                                                                               // calls the setup void if the soft creates a new chibi gameobject
-            g_name = Instantiate(character, new Vector2(tp.transform.position.x, 295.139f), Quaternion.identity); // instantiate a new chibi at the tp position
+            g_name = Instantiate(character, new Vector2(tp.transform.position.x, 294.65f), Quaternion.identity); // instantiate a new chibi at the tp position
             g_name.name = name;                                                                                         // gets viewer name to the chibi
         }else{
             ChatCommand(name, message);                                                                                 //  calls the chat command void if the user already exist in the scene

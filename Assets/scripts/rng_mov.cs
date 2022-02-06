@@ -15,7 +15,7 @@ public class rng_mov : MonoBehaviour
     public int choose;// decides in which direction to go
     public float direction;
     public float goal; // point x where the chibi is going
-    public float speed = 0.1f; // moving speed of the chibi
+    public float speed = 0.05f; // moving speed of the chibi
     public bool isMoving = true; // check if the chibi's moving
     public Vector2 position_; // movement vector
     public GameObject huggy; // the other chibi hugged
